@@ -1,0 +1,10 @@
+# Lines starting with '#' are considered comments.
+
+# Ignore idea config directory
+/.idea
+
+# Ignore jvm out,
+/out
+
+# Ignore Mac's metafiles
+*.DS_Store
