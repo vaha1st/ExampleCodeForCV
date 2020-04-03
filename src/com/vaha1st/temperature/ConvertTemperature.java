@@ -11,6 +11,9 @@
 
 package com.vaha1st.temperature;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,22 +23,27 @@ import java.sql.*;
 import static java.sql.DriverManager.getConnection;
 
 public class ConvertTemperature {
-    //Создание объекта входных данных
-    private static Input input = new Input();
-    //Создание пустых SQL подключения, сообщения и результатов запроса.
+
+    // Создание spring контейнера с помощью java конфигурационного класса
+    private static AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+
+    // Создание бина входных данных
+    private static Input input = context.getBean("input", Input.class);
+
+    // Создание пустых SQL подключения, сообщения и результатов запроса.
     private static Connection connection = null;
     private static Statement statement = null;
     private static ResultSet resultSet = null;
 
     public static void main(String[] args) {
 
-//        convert(new Input(557.55, TemperatureUnits.RANKINE, TemperatureUnits.CELSIUS));
+        convert(new Input(557.55, TemperatureUnits.RANKINE, TemperatureUnits.CELSIUS));
 
 //        convertManualInput();
 
 //        convertAndStoreSessionHistory();
 
-        convertWithHistoryInSQL();      //Что бы метод работал, необходимо подключиться к своей БД с правами
+//        convertWithHistoryInSQL();      //Что бы метод работал, необходимо подключиться к своей БД с правами
                                         //на создание таблицы. Измените идентификаторы БД в полях тела метода.
 
     }
@@ -356,6 +364,7 @@ public class ConvertTemperature {
      * @author Руслан Вахитов
      * @version 0.01 26 Oct 2019
      */
+    @Component("input")
     static class Input {
 
         /**

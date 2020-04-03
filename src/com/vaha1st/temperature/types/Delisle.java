@@ -1,5 +1,7 @@
 package com.vaha1st.temperature.types;
 
+import org.springframework.stereotype.Component;
+
 /**
  * {@code Delisle} дочерний тип температур. Представляет реализацию конвертации из градусов Делиля в другие.
  *
@@ -7,6 +9,7 @@ package com.vaha1st.temperature.types;
  * @version 0.01 26 Oct 2019
  */
 
+@Component
 public class Delisle extends Temperature {
 
     /**

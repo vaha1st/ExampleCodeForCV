@@ -1,5 +1,7 @@
 package com.vaha1st.temperature.types;
 
+import org.springframework.stereotype.Component;
+
 /**
  * {@code Celsius} дочерний тип температур. Представляет реализацию конвертации из градусов Цельсия в другие.
  * В этом классе разновидностей температур методы конвертации представлены в виде математических формул. В остальных,
@@ -10,6 +12,7 @@ package com.vaha1st.temperature.types;
  * @version 0.01 26 Oct 2019
  */
 
+@Component
 public class Celsius extends Temperature {
 
     /** Результирующее значение температуры */

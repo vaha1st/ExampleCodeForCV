@@ -1,5 +1,7 @@
 package com.vaha1st.temperature;
 
+import org.springframework.stereotype.Component;
+
 /**
  * {@code Runs} используется для обобщения входных данных и результата конвертера за один проход (run). Объекты этого
  * класса будут использоваться для изъятия значений при логировании или вносе в БД.
@@ -7,6 +9,7 @@ package com.vaha1st.temperature;
  * @version 0.01 10 Feb 2020
  * @author Руслан Вахитов
  */
+
 class Runs {
     ConvertTemperature.Input input;
     Double result;

@@ -1,5 +1,7 @@
 package com.vaha1st.temperature.types;
 
+import org.springframework.stereotype.Component;
+
 /**
  * {@code Kelvin} дочерний тип температур. Представляет реализацию конвертации из Кельвинов в другие.
  *
@@ -7,6 +9,7 @@ package com.vaha1st.temperature.types;
  * @version 0.01 26 Oct 2019
  */
 
+@Component
 public class Kelvin extends Temperature {
 
     /** Результирующее значение температуры */
