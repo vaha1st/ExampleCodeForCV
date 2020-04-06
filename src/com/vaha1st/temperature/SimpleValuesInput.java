@@ -5,18 +5,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class SimpleValuesInput implements Input {
     // Переменная класса, осуществляющего конвертацию
-    Conversion conversion;
+    private Conversion conversion;
 
     // Температура на входе
-    double value = 557.55;
-
+    private double value = 557.55;
     // Тип температуры на входе (from)
-    TemperatureUnits inUnit = TemperatureUnits.RANKINE;
-
+    private TemperatureUnits inUnit = TemperatureUnits.RANKINE;
     // Тип температуры на выходе (to)
-    TemperatureUnits outUnit = TemperatureUnits.CELSIUS;
+    private TemperatureUnits outUnit = TemperatureUnits.CELSIUS;
 
-    double result;
+    // Хранение результата
+    private double result;
 
     @Override
     public void performConvert() {
@@ -24,5 +23,15 @@ public class SimpleValuesInput implements Input {
         result = conversion.convert();
     }
 
+    public void setValue(double value) {
+        this.value = value;
+    }
 
+    public void setInUnit(TemperatureUnits inUnit) {
+        this.inUnit = inUnit;
+    }
+
+    public void setOutUnit(TemperatureUnits outUnit) {
+        this.outUnit = outUnit;
+    }
 }

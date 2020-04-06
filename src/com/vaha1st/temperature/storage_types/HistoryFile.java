@@ -4,16 +4,20 @@ import com.vaha1st.temperature.TemperatureUnits;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
 public class HistoryFile implements Storage {
 
-    private final String path = "/Users/ruslan/OneDrive/Документы/Java/BerkutConverter/src/ConversionHistory.txt";
+    // Строка пути к файлу ~/src/ConversionHistory.txt
+    private final String path = new File("").getAbsolutePath()+"/src/ConversionHistory.txt";
+    // Переменные для записи/чтения файла
     private BufferedWriter writer;
     private BufferedReader reader;
-    File history = new File(path);
+    private File history = new File(path);
 
 
     @Override
@@ -22,28 +26,24 @@ public class HistoryFile implements Storage {
         SimpleDateFormat dateFormat = new SimpleDateFormat("E yyyy.MM.dd hh:mm:ss a zzz");
 
         try {
-
             if (!history.exists()) {
                 history.createNewFile();
             }
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } finally {
             try {
                 writer = new BufferedWriter(new FileWriter(path, true));
 
-
-                writer.append(dateFormat.format(new Date()) +": "+ value+""+inUnit.getUnit()+
-                        " = "+result+""+outUnit.getUnit());
+                writer.append(dateFormat.format(new Date()) + ": " + value + "" + inUnit.getUnit() +
+                        " = " + result + "" + outUnit.getUnit());
                 writer.append("\n");
 
                 writer.close();
 
-            }  catch (IOException e) {
+            } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
-
         }
     }
 
@@ -62,7 +62,7 @@ public class HistoryFile implements Storage {
 
     @Override
     public void clear() {
-        if(history.exists()){
+        if (history.exists()) {
             try {
                 writer = new BufferedWriter(new FileWriter(path));
                 writer.write("");
