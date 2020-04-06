@@ -39,6 +39,10 @@ public class Temperature {
         return temperature;
     }
 
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
+    }
+
     @Override
     public String toString() {
         return "is " + temperature;

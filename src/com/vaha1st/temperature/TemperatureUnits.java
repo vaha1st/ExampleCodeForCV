@@ -9,6 +9,7 @@ import com.vaha1st.temperature.types.*;
  * @version 0.01 26 Oct 2019
  * @author Руслан Вахитов
 */
+
 public enum TemperatureUnits {
 
     /** Градусы Цельсия. Идентификацонный номер - 0 */
