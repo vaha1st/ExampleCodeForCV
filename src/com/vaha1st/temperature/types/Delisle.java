@@ -1,15 +1,11 @@
 package com.vaha1st.temperature.types;
 
-import org.springframework.stereotype.Component;
-
 /**
  * {@code Delisle} дочерний тип температур. Представляет реализацию конвертации из градусов Делиля в другие.
  *
  * @author Руслан Вахитов
- * @version 0.01 26 Oct 2019
+ * @version 1.00 26 Oct 2019
  */
-
-@Component
 public class Delisle extends Temperature {
 
     /**
@@ -17,14 +13,16 @@ public class Delisle extends Temperature {
      * необходимой конвертации
      */
     private Celsius celsius = new Celsius();
-    /** Результирующее значение температуры */
+    /**
+     * Результирующее значение температуры
+     */
     private double temperature;
 
     /**
      * Метод {@code process} задает правило выбора необходимой конвертации. Для каждого идентификатора устанавливается
      * подходящий метод реализации.
      *
-     * @param id принимает идентификационный номер температуры "на выходе" (to).
+     * @param id          принимает идентификационный номер температуры "на выходе" (to).
      * @param temperature принимает значение температуры "на входе", которые необходимо конвертировать.
      */
     @Override
@@ -43,7 +41,8 @@ public class Delisle extends Temperature {
         } else this.temperature = temperature;
     }
 
-    /** Методы delisleTo... выполняют конвертацию заданной температуры.
+    /**
+     * Методы delisleTo... выполняют конвертацию заданной температуры.
      *
      * @param delisle принимает градусы Делиля.
      * @return возвращает double значение сконвертированной температуры.
@@ -51,16 +50,20 @@ public class Delisle extends Temperature {
     double delisleToCelsius(double delisle) {
         return this.temperature = round(100 - delisle * 2 / 3);
     }
-    double delisleToFahrenheit (double delisle) {
+
+    double delisleToFahrenheit(double delisle) {
         return this.temperature = celsius.celsiusToFahrenheit(delisleToCelsius(delisle));
     }
-    double delisleToKelvin (double delisle) {
+
+    double delisleToKelvin(double delisle) {
         return this.temperature = celsius.celsiusToKelvin(delisleToCelsius(delisle));
     }
-    double delisleToRankine (double delisle) {
+
+    double delisleToRankine(double delisle) {
         return this.temperature = celsius.celsiusToRankine(delisleToCelsius(delisle));
     }
-    double delisleToNewton (double delisle) {
+
+    double delisleToNewton(double delisle) {
         return this.temperature = celsius.celsiusToNewton(delisleToCelsius(delisle));
     }
 

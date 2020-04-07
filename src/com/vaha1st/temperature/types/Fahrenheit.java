@@ -1,15 +1,11 @@
 package com.vaha1st.temperature.types;
 
-import org.springframework.stereotype.Component;
-
 /**
  * {@code Fahrenheit} дочерний тип температур. Представляет реализацию конвертации из градусов Фаренгейта в другие.
  *
  * @author Руслан Вахитов
- * @version 0.01 26 Oct 2019
+ * @version 1.00 26 Oct 2019
  */
-
-@Component
 public class Fahrenheit extends Temperature {
 
     /**
@@ -17,14 +13,16 @@ public class Fahrenheit extends Temperature {
      * необходимой конвертации
      */
     private Celsius celsius = new Celsius();
-    /** Результирующее значение температуры */
+    /**
+     * Результирующее значение температуры
+     */
     private double temperature;
 
     /**
      * Метод {@code process} задает правило выбора необходимой конвертации. Для каждого идентификатора устанавливается
      * подходящий метод реализации.
      *
-     * @param id принимает идентификационный номер температуры "на выходе" (to).
+     * @param id          принимает идентификационный номер температуры "на выходе" (to).
      * @param temperature принимает значение температуры "на входе", которые необходимо конвертировать.
      */
     @Override
@@ -43,7 +41,8 @@ public class Fahrenheit extends Temperature {
         } else this.temperature = temperature;
     }
 
-    /** Методы fahrenheitTo... выполняют конвертацию заданной температуры.
+    /**
+     * Методы fahrenheitTo... выполняют конвертацию заданной температуры.
      *
      * @param fahrenheit принимает градусы Фаренгейта.
      * @return возвращает double значение сконвертированной температуры.
@@ -51,17 +50,21 @@ public class Fahrenheit extends Temperature {
     double fahrenheitToCelsius(double fahrenheit) {
         return this.temperature = round((fahrenheit - 32) * 5 / 9);
     }
+
     double fahrenheitToKelvin(double fahrenheit) {
 //        return this.temperature = round((fahrenheit + 459.67) * 5 / 9);
         return this.temperature = celsius.celsiusToKelvin(fahrenheitToCelsius(fahrenheit));
     }
+
     double fahrenheitToRankine(double fahrenheit) {
 //        return this.temperature = round(fahrenheit+459.67);
         return this.temperature = celsius.celsiusToRankine(fahrenheitToCelsius(fahrenheit));
     }
+
     double fahrenheitToDelisle(double fahrenheit) {
         return this.temperature = celsius.celsiusToDelisle(fahrenheitToCelsius(fahrenheit));
     }
+
     double fahrenheitToNewton(double fahrenheit) {
         return this.temperature = celsius.celsiusToNewton(fahrenheitToCelsius(fahrenheit));
     }

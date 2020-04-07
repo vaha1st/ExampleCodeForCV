@@ -1,21 +1,32 @@
 package com.vaha1st.temperature.storage_types;
 
 import com.vaha1st.temperature.TemperatureUnits;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
 
 import static java.sql.DriverManager.getConnection;
 
+/**
+ * {@code SQL} реализует подключение к SQL, создает в БД таблицу для истории. Осуществляет работу с хранилищем,
+ * описанную в методах интерфейса Storage.
+ * <p>
+ * Внимание! Для работы класса необходимо подключиться к вашей БД, изменив соответствующие поля, как описано ниже.
+ * Так же для внедрения этого бина в зависимость, необходимо раскомментировать @Component. После этого изменить id бина
+ * в @Qualifier конструктора класса {@link com.vaha1st.temperature.ConsoleInput} на "SQL".
+ * Является синглтон-компонентом Spring.
+ *
+ * @author Руслан Вахитов
+ * @version 1.00 7 Apr 2020
+ */
 //@Component
 public class SQL implements Storage {
 
     // Для подключения к БД в вашей системе, необходимо изменить эти 4 переменных на соответствующие.
-    final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
-    final String DB_URL = "jdbc:oracle:thin:@localhost:1521:XE";
-    final String DB_USER = "admin";
-    final String DB_PASSWORD = "admin";
+    private final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
+    private final String DB_URL = "jdbc:oracle:thin:@localhost:1521:XE";
+    private final String DB_USER = "admin";
+    private final String DB_PASSWORD = "admin";
 
     // Создание SQL подключения, сообщения и результатов запроса.
     private Connection connection;

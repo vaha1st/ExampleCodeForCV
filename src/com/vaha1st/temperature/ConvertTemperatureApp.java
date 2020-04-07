@@ -1,21 +1,17 @@
 /**
  * Конвертер температур. Доступные еденицы измерения: ˚Цельсия, ˚Фаренгейта, ˚Кельвин, ˚Делиля, ˚Ранкина, ˚Ньютона.
- * Цель: упражнение кодинга и оформления кода.
+ * Цель: упражнение кодинга и оформления кода. Использованы Spring IoC и DI, подключение к Oracle SQL БД.
  * <p>
  * <p>
  * Авторские права. У автора есть права.
  *
  * @author Руслан Вахитов
- * @version 0.9 12 Feb 2020
+ * @version 0.91 7 Apr 2020
  */
 
 package com.vaha1st.temperature;
 
-import com.vaha1st.temperature.storage_types.Storage;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.stereotype.Component;
-
-import static java.sql.DriverManager.getConnection;
 
 public class ConvertTemperatureApp {
 
@@ -26,6 +22,7 @@ public class ConvertTemperatureApp {
 
         // Создание бинов
         Input simpleInput = context.getBean("simpleValuesInput", Input.class);
+
         // Для этого бина необходимо указать какую именно зависимость использовать (@Qualifier).
         Input consoleInput = context.getBean("consoleInput", Input.class);
 

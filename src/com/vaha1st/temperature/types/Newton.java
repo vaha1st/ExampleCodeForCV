@@ -1,15 +1,12 @@
 package com.vaha1st.temperature.types;
 
-import org.springframework.stereotype.Component;
-
 /**
  * {@code Newton} дочерний тип температур. Представляет реализацию конвертации из градусов Ньютона в другие.
  *
  * @author Руслан Вахитов
- * @version 0.01 26 Oct 2019
+ * @version 1.00 26 Oct 2019
  */
 
-@Component
 public class Newton extends Temperature {
 
     /**
@@ -17,14 +14,16 @@ public class Newton extends Temperature {
      * необходимой конвертации
      */
     private Celsius celsius = new Celsius();
-    /** Результирующее значение температуры */
+    /**
+     * Результирующее значение температуры
+     */
     private double temperature;
 
     /**
      * Метод {@code process} задает правило выбора необходимой конвертации. Для каждого идентификатора устанавливается
      * подходящий метод реализации.
      *
-     * @param id принимает идентификационный номер температуры "на выходе" (to).
+     * @param id          принимает идентификационный номер температуры "на выходе" (to).
      * @param temperature принимает значение температуры "на входе", которые необходимо конвертировать.
      */
     @Override
@@ -43,7 +42,8 @@ public class Newton extends Temperature {
         } else this.temperature = temperature;
     }
 
-    /** Методы newtonTo... выполняют конвертацию заданной температуры.
+    /**
+     * Методы newtonTo... выполняют конвертацию заданной температуры.
      *
      * @param newton принимает градусы Ньютона.
      * @return возвращает double значение сконвертированной температуры.
@@ -51,15 +51,19 @@ public class Newton extends Temperature {
     double newtonToCelsius(double newton) {
         return this.temperature = round(100.0 / 33.0 * newton);
     }
+
     double newtonToFahrenheit(double newton) {
         return this.temperature = celsius.celsiusToFahrenheit(newtonToCelsius(newton));
     }
+
     double newtonToKelvin(double newton) {
         return this.temperature = celsius.celsiusToKelvin(newtonToCelsius(newton));
     }
+
     double newtonToRankine(double newton) {
         return this.temperature = celsius.celsiusToRankine(newtonToCelsius(newton));
     }
+
     double newtonToDelisle(double newton) {
         return this.temperature = celsius.celsiusToDelisle(newtonToCelsius(newton));
     }

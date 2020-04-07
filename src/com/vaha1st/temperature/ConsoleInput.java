@@ -7,12 +7,19 @@ import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+/**
+ * {@code ConsoleInput} осуществляет прием входных данных с консоли. Пользователь может запросить историю конвертаций,
+ * очистку истории, выход из программы. Является синглтон-компонентом Spring.
+ *
+ * @author Руслан Вахитов
+ * @version 1.00 7 Apr 2020
+ */
 @Component
 public class ConsoleInput implements Input {
 
     private Scanner scanner = new Scanner(System.in);
 
-    // Переменная типа хранилища данных
+    // Переменная типа хранилища данных, куда будет осуществляться запись истории
     private Storage storage;
     // Переменная класса, осуществляющего конвертацию
     private Conversion conversion;
@@ -31,22 +38,30 @@ public class ConsoleInput implements Input {
 
     String incorrectInput = "Неправильный ввод, пожалуйста повторите попытку.";
 
+    // Внедерние зависимости типа хранилища данных. Для изменения необходимо указать нужный бин в @Qualifier
     @Autowired
     private ConsoleInput(@Qualifier("historyFile") Storage storage) {
         this.storage = storage;
     }
 
+    /**
+     * {@code performConvert} метод взаимодействия пользователя с консолью и конвертации полученных данных,
+     * с последующим сохранением истории. Конвертация и вывод на консоль путем вызова класса Conversion и
+     * подстановки входных параметров.
+     */
     @Override
     public void performConvert() {
         System.out.println("Добро пожаловать в конвертер температур.");
 
+        // Повторять запрос конвертации у пользователя, пока не будет вызвана команда "exit"
         while (true) {
 
             System.out.println("Нажмите \"Enter\" для запуска. Введите \"exit\" для выхода, " +
                     "\"history\" для вывода истории, \"clear\" для очистки истории:");
+            // Переменная примет только один из вышеуказанных вариантов ввода, иначе повтор цикла
             val = scanner.nextLine();
 
-            if (val.toLowerCase().equals("exit")) {             // Проверка на запрос выхода из программы.
+            if (val.toLowerCase().equals("exit")) {             // Проверка на запрос выхода из программы
                 storage.exit();
             } else if (val.toLowerCase().equals("clear")) {     // Проверка на запрос очистки истории
                 storage.clear();
@@ -58,8 +73,10 @@ public class ConsoleInput implements Input {
                 System.out.println("Пожалуйста введите температуру для конвертации в порядке:");
 
                 // Ввод значения температуры в текстовом формате, с последующей конвертацией в Double, для обработки
-                // ошибок, связанных со стандартными форматами системы.
+                // ошибок, связанных с плавающей запятой и со стандартными форматами системы.
                 System.out.print("ЗНАЧЕНИЕ ТЕМПЕРАТУРЫ(например 36,6): ");
+
+                // Цикл повторяется пока не будет введен правильный формат значения
                 while (val.isEmpty()) {
                     try {
                         val = scanner.nextLine();
@@ -100,6 +117,7 @@ public class ConsoleInput implements Input {
         TemperatureUnits unit = null;
         // Сброс переменной ввода и проверка значения. Повтор запроса ввода, пока не удовлетворит параметрам.
         val = "";
+        // Цикл повторяется пока не будет введен правильный формат значения
         while (val.isEmpty()) {
             val = scanner.nextLine().toUpperCase();
             switch (val) {

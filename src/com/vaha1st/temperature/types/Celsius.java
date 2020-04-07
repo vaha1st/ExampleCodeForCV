@@ -1,7 +1,5 @@
 package com.vaha1st.temperature.types;
 
-import org.springframework.stereotype.Component;
-
 /**
  * {@code Celsius} дочерний тип температур. Представляет реализацию конвертации из градусов Цельсия в другие.
  * В этом классе разновидностей температур методы конвертации представлены в виде математических формул. В остальных,
@@ -9,20 +7,20 @@ import org.springframework.stereotype.Component;
  * конвертироватся методами этого класса.
  *
  * @author Руслан Вахитов
- * @version 0.01 26 Oct 2019
+ * @version 1.00 26 Oct 2019
  */
-
-@Component
 public class Celsius extends Temperature {
 
-    /** Результирующее значение температуры */
+    /**
+     * Результирующее значение температуры
+     */
     private double temperature;
 
     /**
      * Метод {@code process} задает правило выбора необходимой конвертации. Для каждого идентификатора устанавливается
      * подходящий метод реализации.
      *
-     * @param id принимает идентификационный номер температуры "на выходе" (to).
+     * @param id          принимает идентификационный номер температуры "на выходе" (to).
      * @param temperature принимает значение температуры "на входе", которые необходимо конвертировать.
      */
     @Override
@@ -40,7 +38,8 @@ public class Celsius extends Temperature {
         } else this.temperature = temperature;
     }
 
-    /** Методы celsiusTo... выполняют конвертацию заданной температуры.
+    /**
+     * Методы celsiusTo... выполняют конвертацию заданной температуры.
      *
      * @param celsius принимает градусы Цельсия.
      * @return возвращает double значение сконвертированной температуры.
@@ -48,15 +47,19 @@ public class Celsius extends Temperature {
     double celsiusToFahrenheit(double celsius) {
         return this.temperature = round(celsius * 1.8 + 32);
     }
+
     double celsiusToKelvin(double celsius) {
         return this.temperature = round(celsius + 273.15);
     }
+
     double celsiusToRankine(double celsius) {
         return this.temperature = round((celsius + 273.15) * 9 / 5);
     }
+
     double celsiusToDelisle(double celsius) {
         return this.temperature = round((100 - celsius) * 3 / 2);
     }
+
     double celsiusToNewton(double celsius) {
         return this.temperature = round(33.0 / 100.0 * celsius);
     }

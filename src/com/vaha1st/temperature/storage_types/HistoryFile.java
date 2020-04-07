@@ -4,16 +4,22 @@ import com.vaha1st.temperature.TemperatureUnits;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * {@code HistoryFile} реализует создает текстовый файл истории. Осуществляет работу с файлом,
+ * описанную в методах интерфейса Storage.
+ * Является синглтон-компонентом Spring.
+ *
+ * @author Руслан Вахитов
+ * @version 1.00 7 Apr 2020
+ */
 @Component
 public class HistoryFile implements Storage {
 
-    // Строка пути к файлу ~/src/ConversionHistory.txt
-    private final String path = new File("").getAbsolutePath()+"/src/ConversionHistory.txt";
+    // Строковое представление пути к файлу ~/src/ConversionHistory.txt
+    private final String path = new File("").getAbsolutePath() + "/src/ConversionHistory.txt";
     // Переменные для записи/чтения файла
     private BufferedWriter writer;
     private BufferedReader reader;
@@ -23,8 +29,10 @@ public class HistoryFile implements Storage {
     @Override
     public void write(double value, TemperatureUnits inUnit, TemperatureUnits outUnit, double result) {
 
+        // Задается формат даты/времени
         SimpleDateFormat dateFormat = new SimpleDateFormat("E yyyy.MM.dd hh:mm:ss a zzz");
 
+        // Создается файл ConversionHistory.txt если еще не существует
         try {
             if (!history.exists()) {
                 history.createNewFile();
@@ -32,6 +40,8 @@ public class HistoryFile implements Storage {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } finally {
+
+            // Запись в файл даты и данных конвертации и переход на новую строку.
             try {
                 writer = new BufferedWriter(new FileWriter(path, true));
 
@@ -62,6 +72,7 @@ public class HistoryFile implements Storage {
 
     @Override
     public void clear() {
+        // Если файл существует, производится его очистка
         if (history.exists()) {
             try {
                 writer = new BufferedWriter(new FileWriter(path));
@@ -70,22 +81,24 @@ public class HistoryFile implements Storage {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else System.out.println("History file not found");
+        } else System.out.println("Файл истории не найден");
     }
 
     @Override
     public void history() {
-        try {
-            reader = new BufferedReader(new FileReader(path));
-            String tempLine;
+        // Если файл существует, производится вывод сожержимого построчно
+        if (history.exists()) {
+            try {
+                reader = new BufferedReader(new FileReader(path));
+                String tempLine;
 
-            while ((tempLine = reader.readLine()) != null) {
-                System.out.println(tempLine);
+                while ((tempLine = reader.readLine()) != null) {
+                    System.out.println(tempLine);
+                }
+                reader.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
-
-            reader.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         }
     }
 }
