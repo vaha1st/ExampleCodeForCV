@@ -10,6 +10,10 @@
 <html>
 <head>
     <title>Temperature Converter</title>
+
+    <style>
+        .error {color:red}
+    </style>
 </head>
 <body>
 
@@ -27,7 +31,8 @@
         <form:input path="result"/>
 
 
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Конвертировать" />
+        <form:errors path="value" cssClass="error"/>
 
     </form:form>
 
