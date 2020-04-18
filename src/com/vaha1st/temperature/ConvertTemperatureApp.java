@@ -6,7 +6,7 @@
  * Авторские права. У автора есть права.
  *
  * @author Руслан Вахитов
- * @version 0.91 7 Apr 2020
+ * @version 1.0 7 Apr 2020
  */
 
 package com.vaha1st.temperature;

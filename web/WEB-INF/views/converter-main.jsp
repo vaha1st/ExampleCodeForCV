@@ -1,9 +1,9 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: ruslan
+  Домашняя страница для выбора типа конвертируемых значений
+  Autor: Руслан Вахитов
   Date: 11.04.2020
   Time: 21:31
-  To change this template use File | Settings | File Templates.
+  Version: 0.1
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
