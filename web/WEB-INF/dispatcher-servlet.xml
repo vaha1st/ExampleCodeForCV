@@ -11,23 +11,24 @@
     	http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!-- Add support for component scanning -->
+    <!-- Добавление библиотеки для сканирования компонентов spring -->
     <context:component-scan base-package="com.vaha1st" />
 
-    <!-- Add support for conversion, formatting and validation support -->
+    <!-- Поддержка конверсии, формата и валидации -->
     <mvc:annotation-driven/>
 
-    <!-- Define Spring MVC view resolver -->
+    <!-- Определение распознавателя MVC представлений -->
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/" />
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <!-- Load custom message resources -->
+    <!-- Загрузка ресурсов для кастомизации сообщений -->
     <bean id="messageSource"
           class="org.springframework.context.support.ResourceBundleMessageSource">
-
+        <!--Использована замена сообщения на ошибке несовпадения типа вводимых данных, если пользователь введет строку
+        вместо цифр. src/resources/messages.properties -->
         <property name="basenames" value="resources/messages" />
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
