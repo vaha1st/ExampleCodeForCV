@@ -15,12 +15,12 @@ public enum TemperatureUnits {
     /**
      * Градусы Цельсия. Идентификацонный номер - 0
      */
-    CELSIUS(0, "˚C", new Celsius()),
+    CELSIUS(0, "C", new Celsius()),
 
     /**
      * Градусы Фаренгейта. Идентификацонный номер - 1
      */
-    FAHRENHEIT(1, "˚F", new Fahrenheit()),
+    FAHRENHEIT(1, "F", new Fahrenheit()),
 
     /**
      * Кельвин. Идентификацонный номер - 2
@@ -30,17 +30,17 @@ public enum TemperatureUnits {
     /**
      * Градусы Делиля. Идентификацонный номер - 3
      */
-    DELISLE(3, "˚D", new Delisle()),
+    DELISLE(3, "D", new Delisle()),
 
     /**
      * Градусы Ранкина. Идентификацонный номер - 4
      */
-    RANKINE(4, "˚Ra", new Rankine()),
+    RANKINE(4, "Ra", new Rankine()),
 
     /**
      * Градусы Ньютона. Идентификацонный номер - 5
      */
-    NEWTON(5, "˚N", new Newton());
+    NEWTON(5, "N", new Newton());
 
     /**
      * Хранит идентификационный номер для созданного эксземпляра температуры.
