@@ -20,7 +20,7 @@
 <body>
 
     <!-- Форма для ввода -->
-    <form:form action="result" modelAttribute="input" method="post">
+    <form:form action="resultWithHistory" modelAttribute="inputWH" method="post">
 
         <!-- Ввод значения температуры бина -->
         <form:input path="value" />
@@ -44,9 +44,34 @@
 
     </form:form>
 
-    <input type="button" value="Показать историю"
-           onclick="window.location.href='input-with-history; return false'"
+    <input type="button" value="Скрыть историю"
+           onclick="window.location.href='input; return false'"
     />
+
+    <table>
+        <tr>
+            <th>Value</th>
+            <th>In Unit</th>
+            <th>Result</th>
+            <th>Out Unit</th>
+        </tr>
+
+        <c:forEach var="tempInput" items="${inputHistory}">
+
+            <c:url var="deleteLink" value="/temperature/delete">
+                <c:param name="inputId" value="${tempInput.id}"/>
+            </c:url>
+
+            <tr>
+                <td> ${tempInput.value} </td>
+                <td> ${tempInput.inUnit} </td>
+                <td> ${tempInput.result} </td>
+                <td> ${tempInput.outUnit} </td>
+                <td><a href="${deleteLink}">Delete</a></td>
+            </tr>
+        </c:forEach>
+
+    </table>
 
 
 </body>

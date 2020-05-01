@@ -9,4 +9,6 @@ public interface TemperatureDAO {
     List<TempConversion> getTempEntity();
 
     void saveConversion(TempConversion tempConversion);
+
+    void deleteInput(int id);
 }

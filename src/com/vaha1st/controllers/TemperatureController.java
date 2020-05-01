@@ -3,7 +3,6 @@ package com.vaha1st.controllers;
 import com.vaha1st.entity.TempConversion;
 import com.vaha1st.service.TemperatureService;
 import com.vaha1st.temperature.HibernateReadyInput;
-import com.vaha1st.temperature.SimpleValuesInput;
 import com.vaha1st.temperature.SpringConfig;
 import com.vaha1st.temperature.TemperatureUnits;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -35,10 +33,8 @@ public class TemperatureController {
     TemperatureService temperatureService;
 
     // Обработка запросов на ввод данных.
-    @RequestMapping("/input")
+    @GetMapping("/input")
     private String input(Model model) {
-
-        List<TempConversion> tempConversion = temperatureService.getTempEntity();
 
         // Получение бина простейшей конвертации.
         HibernateReadyInput input = context.getBean("hibernateReadyInput", HibernateReadyInput.class);
@@ -51,8 +47,26 @@ public class TemperatureController {
         return "temperature-converter";
     }
 
+    // Обработка запросов на ввод данных.
+    @GetMapping("/input-with-history")
+    private String inputWithHistory(Model model) {
+
+        List<TempConversion> tempConversion = temperatureService.getTempEntity();
+
+        // Получение бина простейшей конвертации.
+        HibernateReadyInput input = context.getBean("hibernateReadyInput", HibernateReadyInput.class);
+
+        // Добавление в атрибуты модели полученного бина и значений ENUM TemperatureUnits
+        model.addAttribute("inputWH", input);
+        model.addAttribute("temperatureUnits", TemperatureUnits.values());
+        model.addAttribute("inputHistory", tempConversion);
+
+        // Адресация к temperature-converter-with-history.jsp
+        return "temperature-converter-with-history";
+    }
+
     // Обработка введенных данных из формы в temperature-converter.jsp
-    @RequestMapping("/result")
+    @PostMapping("/result")
     private String processConversion(
             @Valid @ModelAttribute("input") HibernateReadyInput input, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -63,4 +77,26 @@ public class TemperatureController {
             return "temperature-converter";
         }
     }
+
+    // Обработка введенных данных из формы в temperature-converter.jsp
+    @PostMapping("/resultWithHistory")
+    private String processConversionWithHistory(
+            @Valid @ModelAttribute("inputWH") HibernateReadyInput input, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "temperature-converter-with-history";
+        } else {
+            input.performConvert();
+            temperatureService.saveConversion(input.getTempConversion());
+            return "redirect:/temperature/input-with-history";
+        }
+    }
+
+    @GetMapping("/delete")
+    private String deleteInputFromHistory(@RequestParam("inputId") int id) {
+        temperatureService.deleteInput(id);
+        return "redirect:/temperature/input-with-history";
+    }
+
+
+
 }

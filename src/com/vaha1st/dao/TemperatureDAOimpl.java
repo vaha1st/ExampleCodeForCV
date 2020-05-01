@@ -35,4 +35,16 @@ public class TemperatureDAOimpl implements TemperatureDAO {
 
         currentSession.save("conversion", tempConversion);
     }
+
+    @Override
+    public void deleteInput(int id) {
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        Query<TempConversion> theQuery = currentSession.createQuery(
+                "delete from TempConversion where id=:theConversionId");
+
+        theQuery.setParameter("theConversionId", id);
+
+        theQuery.executeUpdate();
+    }
 }

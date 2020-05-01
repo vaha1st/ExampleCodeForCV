@@ -26,4 +26,10 @@ public class TemperatureServiceImpl implements TemperatureService {
     public void saveConversion(TempConversion tempConversion) {
         temperatureDAO.saveConversion(tempConversion);
     }
+
+    @Override
+    @Transactional
+    public void deleteInput(int id) {
+        temperatureDAO.deleteInput(id);
+    }
 }
