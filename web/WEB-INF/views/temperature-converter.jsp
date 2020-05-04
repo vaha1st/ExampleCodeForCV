@@ -4,9 +4,8 @@
 <%--
   Страница для ввода данных в spring форму
   Autor: Руслан Вахитов
-  Date: 11.04.2020
-  Time: 21:31
-  Version: 0.1
+  Date: 04.05.2020
+  Version: 0.2
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -44,6 +43,7 @@
 
     </form:form>
 
+    <!-- Кнопка для отображения истории -->
     <input type="button" value="Показать историю"
            onclick="window.location.href='input-with-history; return false'"
     />

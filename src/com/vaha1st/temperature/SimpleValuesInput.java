@@ -13,17 +13,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class SimpleValuesInput implements Input {
     // Переменная класса, осуществляющего конвертацию
-    private Conversion conversion;
+    protected Conversion conversion;
 
     // Температура на входе
-    private double value = 0;
+    protected double value = 0;
     // Тип температуры на входе (from)
-    private TemperatureUnits inUnit = TemperatureUnits.CELSIUS;
+    protected TemperatureUnits inUnit = TemperatureUnits.CELSIUS;
     // Тип температуры на выходе (to)
-    private TemperatureUnits outUnit = TemperatureUnits.CELSIUS;
+    protected TemperatureUnits outUnit = TemperatureUnits.CELSIUS;
 
     // Хранение результата
-    private double result;
+    protected double result;
 
     /**
      * {@code performConvert} метод выполняет конвертацию и вывод на консоль путем вызова класса Conversion и

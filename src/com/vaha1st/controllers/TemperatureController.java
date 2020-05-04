@@ -19,7 +19,7 @@ import java.util.List;
  * {@code TemperatureController} контроллер для обработки запросов по работе с температурным конвертером.
  *
  * @author Руслан Вахитов
- * @version 1.00 17 Apr 2020
+ * @version 1.10 4 May 2020
  */
 
 @Controller
@@ -29,6 +29,7 @@ public class TemperatureController {
     // Создание spring контейнера с помощью java конфигурационного класса
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
 
+    // Подключение сервиса для обработки запросов
     @Autowired
     TemperatureService temperatureService;
 
@@ -47,19 +48,20 @@ public class TemperatureController {
         return "temperature-converter";
     }
 
-    // Обработка запросов на ввод данных.
+    // Обработка запросов на ввод данных с опцией истории.
     @GetMapping("/input-with-history")
     private String inputWithHistory(Model model) {
 
+        // Список конвертация для отображения истории
         List<TempConversion> tempConversion = temperatureService.getTempEntity();
 
         // Получение бина простейшей конвертации.
         HibernateReadyInput input = context.getBean("hibernateReadyInput", HibernateReadyInput.class);
 
-        // Добавление в атрибуты модели полученного бина и значений ENUM TemperatureUnits
+        // Добавление в атрибуты модели полученного бина ввода, истории и значений ENUM TemperatureUnits
         model.addAttribute("inputWH", input);
-        model.addAttribute("temperatureUnits", TemperatureUnits.values());
         model.addAttribute("inputHistory", tempConversion);
+        model.addAttribute("temperatureUnits", TemperatureUnits.values());
 
         // Адресация к temperature-converter-with-history.jsp
         return "temperature-converter-with-history";
@@ -78,7 +80,7 @@ public class TemperatureController {
         }
     }
 
-    // Обработка введенных данных из формы в temperature-converter.jsp
+    // Обработка введенных данных из формы в temperature-converter-with-history.jsp
     @PostMapping("/resultWithHistory")
     private String processConversionWithHistory(
             @Valid @ModelAttribute("inputWH") HibernateReadyInput input, BindingResult bindingResult) {
@@ -91,9 +93,17 @@ public class TemperatureController {
         }
     }
 
+    // Обработка запроса на удаление отдельной записи истории
     @GetMapping("/delete")
     private String deleteInputFromHistory(@RequestParam("inputId") int id) {
         temperatureService.deleteInput(id);
+        return "redirect:/temperature/input-with-history";
+    }
+
+    // Обработка запроса на полную очистку истории
+    @GetMapping("/clear")
+    private String clearHistory() {
+        temperatureService.clearHistory();
         return "redirect:/temperature/input-with-history";
     }
 

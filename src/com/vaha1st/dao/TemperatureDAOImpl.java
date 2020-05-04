@@ -9,13 +9,20 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * {@code TemperatureDAOImpl} имплементация интерфейса DAO для для взаимодействия сервиса и БД.
+ *
+ * @author Руслан Вахитов
+ * @version 1.00 4 May 2020
+ */
 @Repository
-public class TemperatureDAOimpl implements TemperatureDAO {
+public class TemperatureDAOImpl implements TemperatureDAO {
 
-    // need to inject session factory
+    // Подключение фафбрики hibernate
     @Autowired
     private SessionFactory sessionFactory;
 
+    // Получение списка конвертаций из таблицы БД "converting_history" путем запроса hql
     @Override
     public List<TempConversion> getTempEntity() {
 
@@ -28,6 +35,7 @@ public class TemperatureDAOimpl implements TemperatureDAO {
         return conversions;
     }
 
+    // Сохранение конвертации в БД
     @Override
     public void saveConversion(TempConversion tempConversion) {
 
@@ -36,6 +44,7 @@ public class TemperatureDAOimpl implements TemperatureDAO {
         currentSession.save("conversion", tempConversion);
     }
 
+    // Удаление записи конвертации из таблицы по полченному из модели id
     @Override
     public void deleteInput(int id) {
         Session currentSession = sessionFactory.getCurrentSession();
@@ -45,6 +54,15 @@ public class TemperatureDAOimpl implements TemperatureDAO {
 
         theQuery.setParameter("theConversionId", id);
 
+        theQuery.executeUpdate();
+    }
+
+    // Очистка таблицы "converting_history" путем запроса hql
+    @Override
+    public void clearHistory() {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Query<TempConversion> theQuery = currentSession.createQuery(
+                "delete from TempConversion");
         theQuery.executeUpdate();
     }
 }

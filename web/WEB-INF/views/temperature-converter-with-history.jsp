@@ -1,12 +1,11 @@
-<!-- создание тэга для spring-форм -->
+<!-- создание тэгов для spring-форм и jstl-->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
   Страница для ввода данных в spring форму
   Autor: Руслан Вахитов
-  Date: 11.04.2020
-  Time: 21:31
-  Version: 0.1
+  Date: 04.05.2020
+  Version: 0.2
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -44,16 +43,21 @@
 
     </form:form>
 
+    <!--  Кнопка сокрытия истории  -->
     <input type="button" value="Скрыть историю"
            onclick="window.location.href='input; return false'"
     />
+    <!--  Кнопка очистки истории, по клику защита от дурака -->
+    <input type="button" value="Очистить историю"
+           onclick="if ((confirm('Удалить историю безвозвратно?')))window.location.href='clear'; return false" />
 
+    <!-- Таблица истории. Вывод по циклу forEach -->
     <table>
         <tr>
-            <th>Value</th>
-            <th>In Unit</th>
-            <th>Result</th>
-            <th>Out Unit</th>
+            <th>Температура</th>
+            <th> (°T) </th>
+            <th>Результат</th>
+            <th> (°T) </th>
         </tr>
 
         <c:forEach var="tempInput" items="${inputHistory}">
@@ -67,7 +71,7 @@
                 <td> ${tempInput.inUnit} </td>
                 <td> ${tempInput.result} </td>
                 <td> ${tempInput.outUnit} </td>
-                <td><a href="${deleteLink}">Delete</a></td>
+                <td><a href="${deleteLink}">Удалить</a></td>
             </tr>
         </c:forEach>
 
