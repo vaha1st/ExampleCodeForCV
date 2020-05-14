@@ -35,4 +35,13 @@ public class HibernateReadyInput extends SimpleValuesInput {
         this.tempConversion = tempConversion;
     }
 
+    @Override
+    public String toString() {
+        return "HibernateReadyInput{" +
+                ", value=" + value +
+                ", inUnit=" + inUnit +
+                ", outUnit=" + outUnit +
+                ", result=" + result +
+                '}';
+    }
 }

@@ -31,11 +31,11 @@ public class TemperatureController {
 
     // Подключение сервиса для обработки запросов
     @Autowired
-    TemperatureService temperatureService;
+    private TemperatureService temperatureService;
 
     // Обработка запросов на ввод данных.
     @GetMapping("/input")
-    private String input(Model model) {
+    protected String input(Model model) {
 
         // Получение бина простейшей конвертации.
         HibernateReadyInput input = context.getBean("hibernateReadyInput", HibernateReadyInput.class);
@@ -50,7 +50,7 @@ public class TemperatureController {
 
     // Обработка запросов на ввод данных с опцией истории.
     @GetMapping("/input-with-history")
-    private String inputWithHistory(Model model) {
+    protected String inputWithHistory(Model model) {
 
         // Список конвертация для отображения истории
         List<TempConversion> tempConversion = temperatureService.getTempEntity();
@@ -69,7 +69,7 @@ public class TemperatureController {
 
     // Обработка введенных данных из формы в temperature-converter.jsp
     @PostMapping("/result")
-    private String processConversion(
+    protected String processConversion(
             @Valid @ModelAttribute("input") HibernateReadyInput input, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "temperature-converter";
@@ -82,7 +82,7 @@ public class TemperatureController {
 
     // Обработка введенных данных из формы в temperature-converter-with-history.jsp
     @PostMapping("/resultWithHistory")
-    private String processConversionWithHistory(
+    protected String processConversionWithHistory(
             @Valid @ModelAttribute("inputWH") HibernateReadyInput input, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "temperature-converter-with-history";
@@ -95,14 +95,14 @@ public class TemperatureController {
 
     // Обработка запроса на удаление отдельной записи истории
     @GetMapping("/delete")
-    private String deleteInputFromHistory(@RequestParam("inputId") int id) {
+    protected String deleteInputFromHistory(@RequestParam("inputId") int id) {
         temperatureService.deleteInput(id);
         return "redirect:/temperature/input-with-history";
     }
 
     // Обработка запроса на полную очистку истории
     @GetMapping("/clear")
-    private String clearHistory() {
+    protected String clearHistory() {
         temperatureService.clearHistory();
         return "redirect:/temperature/input-with-history";
     }

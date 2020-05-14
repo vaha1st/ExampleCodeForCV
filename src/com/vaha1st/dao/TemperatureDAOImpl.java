@@ -64,5 +64,9 @@ public class TemperatureDAOImpl implements TemperatureDAO {
         Query<TempConversion> theQuery = currentSession.createQuery(
                 "delete from TempConversion");
         theQuery.executeUpdate();
+
+        // сброс id
+        currentSession.createSQLQuery(
+                "ALTER TABLE converting_history AUTO_INCREMENT=1").executeUpdate();
     }
 }
