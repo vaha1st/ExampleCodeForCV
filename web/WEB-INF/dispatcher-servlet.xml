@@ -18,7 +18,7 @@
 		http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- Поддержка AspectJ autoproxy для AOP -->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <aop:aspectj-autoproxy />
 
     <!-- Добавление библиотеки для сканирования компонентов spring -->
     <context:component-scan base-package="com.vaha1st" />

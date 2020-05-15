@@ -7,6 +7,13 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+/**
+ * {@code MyLoggingAspect} аспект для логирования протекания web программы. Простой вывод имен методов и их аргументов.
+ *
+ * @author Руслан Вахитов
+ * @version 1.0 14 May 2020
+ */
+
 @Aspect
 @Component
 public class MyLoggingAspect {
@@ -31,7 +38,7 @@ public class MyLoggingAspect {
     }
 
 
-    // Аспекты @Before и @AfterReturning для логирования процесса протекания программы
+    // @Before и @AfterReturning для логирования процесса протекания программы
     @Before("forAppFlow()")
     public void before(JoinPoint theJoinPoint) {
 
