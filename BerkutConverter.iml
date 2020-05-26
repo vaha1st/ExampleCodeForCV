@@ -4,8 +4,7 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/com/vaha1st/temperature/SpringConfig.java</file>
-          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/vaha1st/converter/config/SpringContextConfig.java</file>
         </fileset>
       </configuration>
     </facet>
@@ -110,11 +109,6 @@
     <orderEntry type="library" name="Maven: jakarta.validation:jakarta.validation-api:2.0.2" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.20" level="project" />
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.6.1" level="project" />
-    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.0" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-core:2.3.0" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.3.0" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.activation:javax.activation:1.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.8.13" level="project" />
     <orderEntry type="library" name="Maven: com.oracle.database.jdbc:ojdbc10:19.6.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.oracle.database.jdbc:ucp:19.6.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.oracle.database.security:oraclepki:19.6.0.0" level="project" />
@@ -122,5 +116,10 @@
     <orderEntry type="library" name="Maven: com.oracle.database.security:osdt_core:19.6.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.oracle.database.ha:simplefan:19.6.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.oracle.database.ha:ons:19.6.0.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-core:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.activation:javax.activation:1.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.8.13" level="project" />
   </component>
 </module>
